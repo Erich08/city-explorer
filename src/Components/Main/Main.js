@@ -6,11 +6,7 @@ class Main extends Component {
     return (
       <div className='main'>
         {this.props.locationSearch.display_name && (
-          <h1>
-            The city we searched for is {this.props.locationSearch.display_name}{' '}
-            at latitude/longitude: {this.props.locationSearch.lat}
-            {this.props.locationSearch.lon}
-          </h1>
+          <h1>{this.props.locationSearch.display_name}.</h1>
         )}
       </div>
     );
