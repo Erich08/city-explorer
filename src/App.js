@@ -12,6 +12,7 @@ class App extends Component {
       locationSearch: '',
       locationObj: {},
       errorMessage: '',
+      weatherArr: [],
     };
   }
 
@@ -24,6 +25,7 @@ class App extends Component {
         locationObj: searched.data[0],
         errorMessage: '',
       });
+      this.weatherData();
     } catch (error) {
       this.setState({ errorMessage: error });
       alert(this.state.errorMessage);
@@ -34,6 +36,19 @@ class App extends Component {
     event.preventDefault();
     this.setState({ locationSearch: event.target.value });
   };
+
+  weatherData = async () => {
+    try {
+      const url = `${process.env.REACT_APP_PORT}/weather?searchQuery=${this.state.locationSearch}`;
+      const response = await axios.get(url);
+      console.log(response.data);
+      this.setState({ weatherArr: response.data });
+    } catch (error) {
+      this.setState({ errorMessage: error });
+      alert(this.state.errorMessage);
+    }
+  };
+
   render() {
     return (
       <div className='App'>
@@ -42,7 +57,10 @@ class App extends Component {
           handleChange={this.handleChange}
         />
 
-        <Main locationSearch={this.state.locationObj} />
+        <Main
+          locationSearch={this.state.locationObj}
+          weatherArr={this.state.weatherArr}
+        />
         {this.state.locationObj.display_name && (
           <Image
             className='map'
