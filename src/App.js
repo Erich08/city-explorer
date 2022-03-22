@@ -11,16 +11,23 @@ class App extends Component {
     this.state = {
       locationSearch: '',
       locationObj: {},
+      errorMessage: '',
     };
   }
 
   handleLocation = async () => {
-    const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.locationSearch}&format=json`;
-    const searched = await axios.get(url);
-    console.log(searched.data[0]);
-    this.setState({
-      locationObj: searched.data[0],
-    });
+    try {
+      const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.locationSearch}&format=json`;
+      const searched = await axios.get(url);
+      console.log(searched.data[0]);
+      this.setState({
+        locationObj: searched.data[0],
+        errorMessage: '',
+      });
+    } catch (error) {
+      this.setState({ errorMessage: error });
+      alert(this.state.errorMessage);
+    }
   };
 
   handleChange = (event) => {
