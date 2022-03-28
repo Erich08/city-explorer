@@ -13,6 +13,7 @@ class App extends Component {
       locationObj: {},
       errorMessage: '',
       weatherArr: [],
+      movieArr: [],
     };
   }
 
@@ -26,6 +27,7 @@ class App extends Component {
         errorMessage: '',
       });
       this.weatherData();
+      this.movieData();
     } catch (error) {
       this.setState({ errorMessage: error });
       alert(this.state.errorMessage);
@@ -43,6 +45,18 @@ class App extends Component {
       const response = await axios.get(url);
       console.log(response.data);
       this.setState({ weatherArr: response.data });
+    } catch (error) {
+      this.setState({ errorMessage: error });
+      alert(this.state.errorMessage);
+    }
+  };
+
+  movieData = async () => {
+    try {
+      const url = `${process.env.REACT_APP_PORT}/movies?searchQuery=${this.state.locationSearch}`;
+      const movieResponse = await axios.get(url);
+      console.log(movieResponse.data);
+      this.setState({ movieArr: movieResponse.data });
     } catch (error) {
       this.setState({ errorMessage: error });
       alert(this.state.errorMessage);
@@ -80,6 +94,7 @@ class App extends Component {
         <Main
           locationSearch={this.state.locationObj}
           weatherArr={this.state.weatherArr}
+          movieArr={this.state.movieArr}
         />
       </div>
     );
