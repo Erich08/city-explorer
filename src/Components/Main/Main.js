@@ -15,6 +15,12 @@ class Main extends Component {
                 key={idx}
                 date={data.date}
                 description={data.description}
+                low={data.low}
+                high={data.high}
+                icon={data.icon}
+                windspd={data.windspd}
+                windir={data.winddir}
+                rain={data.rain}
               />
             ))}
           </div>

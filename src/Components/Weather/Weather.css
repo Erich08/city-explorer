@@ -1,0 +1,13 @@
+.cards {
+  display: inline-block;
+}
+
+.card-body {
+  height: 350px;
+  text-align: center;
+}
+
+.card-img {
+  height: 50px;
+  width: 50px;
+}
