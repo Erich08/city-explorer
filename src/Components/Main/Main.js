@@ -8,7 +8,6 @@ class Main extends Component {
       <div className='main'>
         {this.props.locationSearch.display_name && (
           <div>
-            <h1>{this.props.locationSearch.display_name}.</h1>
             {this.props.weatherArr.map((data, idx) => (
               <Weather
                 weatherArr={this.props.weatherArr}

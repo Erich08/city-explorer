@@ -1,5 +1,6 @@
 .cards {
   display: inline-block;
+  opacity: 0.9;
 }
 
 .card-body {
