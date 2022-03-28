@@ -1,0 +1,12 @@
+.movie-cards {
+  display: inline-block;
+  overflow: auto;
+  margin-top: 3rem;
+  margin-left: 2rem;
+  height: 500px;
+  background-color: white;
+}
+
+.movie-cards img {
+  height: 400px;
+}

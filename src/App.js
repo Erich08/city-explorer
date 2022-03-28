@@ -13,6 +13,7 @@ class App extends Component {
       locationObj: {},
       errorMessage: '',
       weatherArr: [],
+      movieArr: [],
     };
   }
 
@@ -26,6 +27,7 @@ class App extends Component {
         errorMessage: '',
       });
       this.weatherData();
+      this.movieData();
     } catch (error) {
       this.setState({ errorMessage: error });
       alert(this.state.errorMessage);
@@ -49,6 +51,18 @@ class App extends Component {
     }
   };
 
+  movieData = async () => {
+    try {
+      const url = `${process.env.REACT_APP_PORT}/movies?searchQuery=${this.state.locationSearch}`;
+      const movieResponse = await axios.get(url);
+      console.log(movieResponse.data);
+      this.setState({ movieArr: movieResponse.data });
+    } catch (error) {
+      this.setState({ errorMessage: error });
+      alert(this.state.errorMessage);
+    }
+  };
+
   render() {
     return (
       <div className='App'>
@@ -57,23 +71,31 @@ class App extends Component {
           handleChange={this.handleChange}
         />
 
+        {/* <Main
+          locationSearch={this.state.locationObj}
+          weatherArr={this.state.weatherArr}
+        /> */}
+        {this.state.locationObj.display_name && (
+          <div>
+            <h1>{this.state.locationObj.display_name}</h1>
+            <Image
+              className='map'
+              src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.locationObj.lat},${this.state.locationObj.lon}&zoom=10`}
+              alt={this.state.locationObj.display_name}
+            />
+          </div>
+        )}
+        {this.state.locationObj.display_name && (
+          <p className='lat-lon'>
+            Latitude: {Math.round(this.state.locationObj.lat)} Longitude:{' '}
+            {Math.round(this.state.locationObj.lon)}
+          </p>
+        )}
         <Main
           locationSearch={this.state.locationObj}
           weatherArr={this.state.weatherArr}
+          movieArr={this.state.movieArr}
         />
-        {this.state.locationObj.display_name && (
-          <Image
-            className='map'
-            src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.locationObj.lat},${this.state.locationObj.lon}&zoom=10`}
-            alt={this.state.locationObj.display_name}
-          />
-        )}
-        {this.state.locationObj.display_name && (
-          <p>
-            Latitude: {this.state.locationObj.lat} Longitude:{' '}
-            {this.state.locationObj.lon}
-          </p>
-        )}
       </div>
     );
   }

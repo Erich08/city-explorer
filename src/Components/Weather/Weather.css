@@ -1,0 +1,14 @@
+.cards {
+  display: inline-block;
+  opacity: 0.9;
+}
+
+.card-body {
+  height: 350px;
+  text-align: center;
+}
+
+.card-img {
+  height: 50px;
+  width: 50px;
+}
