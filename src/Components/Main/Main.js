@@ -7,7 +7,7 @@ class Main extends Component {
   render() {
     return (
       <div className='main'>
-        {this.props.locationSearch.display_name && (
+        {this.props.weatherArr.length > 0 && (
           <div>
             {this.props.weatherArr.map((data, idx) => (
               <Weather
@@ -25,7 +25,7 @@ class Main extends Component {
             ))}
           </div>
         )}
-        {this.props.locationSearch.display_name && (
+        {this.props.movieArr.length > 0 && (
           <div>
             {this.props.movieArr.map((data, idx) => (
               <Movies
