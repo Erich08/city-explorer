@@ -33,3 +33,9 @@ img {
 .lat-lon {
   color: white;
 }
+
+@media (max-width: 600px) {
+  img {
+    width: 90%;
+  }
+}

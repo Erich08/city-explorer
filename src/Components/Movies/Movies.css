@@ -10,3 +10,9 @@
 .movie-cards img {
   height: 400px;
 }
+
+@media (max-width: 600px) {
+  .movie-cards {
+    width: 75%;
+  }
+}
