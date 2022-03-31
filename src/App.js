@@ -41,7 +41,7 @@ class App extends Component {
 
   weatherData = async () => {
     try {
-      const url = `${process.env.REACT_APP_PORT}/weather?searchQuery=${this.state.locationSearch}`;
+      const url = `${process.env.REACT_APP_PORT}/weather?searchQuery=${this.state.locationSearch}&lat=${this.state.locationObj.lat}&lon=${this.state.locationObj.lon}`;
       const response = await axios.get(url);
       console.log(response.data);
       this.setState({ weatherArr: response.data });
@@ -71,10 +71,6 @@ class App extends Component {
           handleChange={this.handleChange}
         />
 
-        {/* <Main
-          locationSearch={this.state.locationObj}
-          weatherArr={this.state.weatherArr}
-        /> */}
         {this.state.locationObj.display_name && (
           <div>
             <h1>{this.state.locationObj.display_name}</h1>
